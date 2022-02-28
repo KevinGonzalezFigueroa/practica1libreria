@@ -1,12 +1,11 @@
 import { TouchableHighlight, View, Text, StyleSheet } from "react-native";
 
-const Item = ({ value:{titulo, numPags, porcentaje}, onDelete }) => {
+const Item = ({ value, onDelete }) => {
   return (
     <TouchableHighlight onPress={onDelete}>
       <View key={Math.random().toString()}>
         <Text style={styles.listItem}>
-          Titulo: {titulo} \n Nº Pags: {numPags} \n Porcentaje:
-          {porcentaje}
+          Titulo: {value.titulo} {"\n\n"} Nº Pags: {value.paginas} {"\n\n"} Porcentaje: {value.porcentaje}
         </Text>
       </View>
     </TouchableHighlight>

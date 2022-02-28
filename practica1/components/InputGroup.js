@@ -19,7 +19,9 @@ const InputGroup = ({addProductHandler, addMode}) => {
   };
 
   const validateProduct = () => {
-    addProductHandler( titulo, numPags, porcentaje);
+
+    addProductHandler( titulo, numPags, porcentaje );
+
     setTitulo('');
     setNumPags('');
     setPorcentaje('');

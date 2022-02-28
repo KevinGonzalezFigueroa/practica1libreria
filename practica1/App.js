@@ -17,11 +17,11 @@ export default function App() {
   const [bookList, setBookList] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
-  const addProductHandler = ({ titulo, numPags, porcentaje }) => {
-    if (titulo != "" || numPags !="" || porcentaje !="") {
-      setBookList((currentProductList) => [
-        ...currentProductList,
-        { key: Math.random().toString(), value: {titulo, numPags, porcentaje} },
+  const addProductHandler = (titulo, paginas, porcentaje) => {
+    if (titulo !== "") {
+      setBookList(() => [
+        ...bookList,
+        { key: Math.random().toString(), titulo, paginas, porcentaje },
       ]);
     }
     setShowModal(false);
@@ -29,7 +29,7 @@ export default function App() {
 
   const deleteProductHandler = (productKey) => {
     setBookList((currentList) => {
-      return currentList.filter((item) => item.key !== productKey);
+      return currentList.filter((bookList) => bookList.key !== productKey);
     });
   };
 
@@ -37,18 +37,17 @@ export default function App() {
     <View style={styles.container}>
       <Button title={"Add"} onPress={() => setShowModal(true)} />
       <InputGroup addProductHandler={addProductHandler} addMode={showModal} />
-      <View style={styles.listContainer}>
+      <View style={styles.listItem}>
         <FlatList
           data={bookList}
           renderItem={(itemData) => (
             <Item
-              value={itemData.item.value}
+              value={itemData.item}
               onDelete={() => deleteProductHandler(itemData.item.key)}
             />
           )}
         />
       </View>
-      <StatusBar style="auto" />
     </View>
   );
 }
@@ -59,5 +58,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     height: "80%",
     marginTop: 50,
+  },
+  listItem: {
+    flexDirection:"row",
+    justifyContent: "flex-start",
+    alignItems: "center"
   },
 });
